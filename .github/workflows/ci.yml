@@ -13,19 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
+    # Sets up Node.js environment
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
+        cache: 'npm' # Enables caching for npm dependencies
 
+    # Installs dependencies using the lockfile for consistency
     - name: Install dependencies
       run: npm ci
 
+    # Placeholder for future linting step
     - name: Lint Check (Placeholder)
       run: echo "Linting step will be added here"
 
-    - name: Test Execution (Placeholder)
-      run: echo "Testing step will be added here"
+    # Executes the unit tests defined in package.json script
+    - name: Run Unit Tests
+      run: npm test # Runs 'jest --coverage' as configured in package.json
